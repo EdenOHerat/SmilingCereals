@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>All cereals</title>
+	</head>
+	
+	<body>
+		<h1>SMILING CEREALS!!!</h1>
+		<p>CHOOSE THE ONES YOU LIKE THE MOST!!!</p>
+		
+		<div th:if="${#lists.isEmpty(cereals)}">
+			OH, NO!! OUR CEREALS ARE GONE!!!
+		</div>
+		
+		<ul>
+			<li th:each="item : ${cereals}">
+				<a th:href="@{/cereals/{id}(id=${item.id})}"
+					th:text="${item.name}">Cereal name
+				</a>
+				<div th:text="'flavor: ' + ${item.flavor}">Cereal flavor</div>
+				<p th:text="${item.description}">Description</p>					
+			</li>
+		</ul>
+	</body>
+</html>

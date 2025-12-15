@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ADMIN HOME</title>
+	</head>
+	
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>		
+		<h1>HOLY SMOKES, CHARLIE! IT'S THE ADMIN!</h1>
+		<h2>Hello Mr. Admin, what do you wanna do?</h2>
+		<div>
+			<h3>Admin options:</h3>
+			<a href="/admin/cereals/newCerealForm">Create new Smiling Cereal</a>
+		</div>
+	</body>
+</html>
