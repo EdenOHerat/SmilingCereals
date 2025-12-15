@@ -1,0 +1,13 @@
+it/uniroma3/siw/smiling_cereals/controller/CerealController.class
+it/uniroma3/siw/smiling_cereals/repo/UserRepo.class
+it/uniroma3/siw/smiling_cereals/controller/GlobalController.class
+it/uniroma3/siw/smiling_cereals/model/Cereal.class
+it/uniroma3/siw/smiling_cereals/repo/CredentialsRepo.class
+it/uniroma3/siw/smiling_cereals/service/CerealService.class
+it/uniroma3/siw/smiling_cereals/SmilingCerealsApplication.class
+it/uniroma3/siw/smiling_cereals/authentication/AuthConfiguration.class
+it/uniroma3/siw/smiling_cereals/service/CredentialsService.class
+it/uniroma3/siw/smiling_cereals/model/User.class
+it/uniroma3/siw/smiling_cereals/model/Credentials.class
+it/uniroma3/siw/smiling_cereals/service/UserService.class
+it/uniroma3/siw/smiling_cereals/repo/CerealRepo.class

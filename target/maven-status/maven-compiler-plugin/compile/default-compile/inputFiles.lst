@@ -1,0 +1,13 @@
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/repo/CredentialsRepo.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/controller/GlobalController.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/service/CredentialsService.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/controller/CerealController.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/service/UserService.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/model/Credentials.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/model/Cereal.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/model/User.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/service/CerealService.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/repo/CerealRepo.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/authentication/AuthConfiguration.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/SmilingCerealsApplication.java
+/home/edmech/Documents/siw projects/smiling-cereals/src/main/java/it/uniroma3/siw/smiling_cereals/repo/UserRepo.java
