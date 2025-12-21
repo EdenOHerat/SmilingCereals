@@ -1,0 +1,23 @@
+header {
+	background-color: #73dbf8;
+	border: solid #73dbf8;
+	padding: 1rem;
+}
+
+header nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #73dbf8;
+}
+
+nav img {
+	height: 65px;
+	width: auto;
+}
+
+nav a {
+	margin-left: 1rem;
+	text-decoration:none;
+	color: #0599d5;
+}

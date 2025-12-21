@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import it.uniroma3.siw.smiling_cereals.model.Cereal;
 import it.uniroma3.siw.smiling_cereals.model.Review;
 import it.uniroma3.siw.smiling_cereals.model.User;
@@ -79,10 +81,27 @@ public class CerealController {
 		User user = creServ.getCredentialsByUsername(userDetails.getUsername()).getUser();
 		review.setUser(user);
 		//Ora facciamol'aggiornamento del rating del cereale
+		System.out.println("The value of the rating is: " + review.getRating());
 		cereal.addRating(review.getRating());
 		//Si fa il save
 		rs.saveReview(review);
 		return "redirect:/cereals/" + id;
+	}
+	
+	/*Delete cereal*/
+	@PostMapping("/admin/deleteCereal")
+	public String deleteCereal(@RequestParam("itemId") Long id) {
+		cs.deleteCereal(cs.getCerealById(id));
+		return "redirect:/cereals";
+	}
+	
+	/*Change the featured status*/
+	@PostMapping("/admin/featuredChange")
+	public String changeFeaturedStatus(@RequestParam("itemId") Long id) {
+		Cereal cereal = cs.getCerealById(id);
+		cereal.setFeatured(!cereal.isFeatured());
+		cs.saveCereal(cereal);
+		return "redirect:/cereals";
 	}
 	
 	

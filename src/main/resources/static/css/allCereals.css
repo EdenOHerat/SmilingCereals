@@ -1,0 +1,11 @@
+.cereals-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.cereals-card img {
+    width: auto;
+    height: 300px;
+    display: block;
+}

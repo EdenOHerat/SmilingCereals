@@ -12,10 +12,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import it.uniroma3.siw.smiling_cereals.model.Credentials;
 import it.uniroma3.siw.smiling_cereals.model.User;
+import it.uniroma3.siw.smiling_cereals.service.CerealService;
 import it.uniroma3.siw.smiling_cereals.service.CredentialsService;
+import it.uniroma3.siw.smiling_cereals.service.ReviewService;
 import it.uniroma3.siw.smiling_cereals.service.UserService;
 import jakarta.validation.Valid;
 import static it.uniroma3.siw.smiling_cereals.model.Credentials.DEFAULT_ROLE;
@@ -29,6 +30,10 @@ public class AuthController {
 	private UserService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;  // <-- inject encoder
+    @Autowired
+    private CerealService cs;
+    @Autowired
+    private ReviewService rs;
 
 	
 	@GetMapping(value = "/register") 
@@ -45,6 +50,9 @@ public class AuthController {
 
 	@GetMapping(value = "/") 
 	public String index(Model model) {
+		model.addAttribute("featured", cs.getFeaturedCereals());
+		model.addAttribute("topCereals", cs.getTopFiveCereals());
+		model.addAttribute("latestReviews", rs.getLatestReviews());
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof AnonymousAuthenticationToken) {
 	        return "homepage.html";
@@ -67,7 +75,7 @@ public class AuthController {
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/homepageAdmin.html";
         }
-        return "homepage.html";
+        return "redirect:/";
     }
 
     @PostMapping("/register")
@@ -91,6 +99,14 @@ public class AuthController {
             return "registrationSuccessful";
         }
         return "registrationForm";
+    }
+    
+    @GetMapping("/profile")
+    public String userProfile(Model model) {
+    	UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	String username = user.getUsername();
+    	model.addAttribute("user", credentialsService.getCredentialsByUsername(username).getUser());
+    	return "profile.html";
     }
 
 }

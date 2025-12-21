@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title th:text="${userDetails.username}">User name</title>
+		<link rel="stylesheet" href="/css/navbar.css">
+	</head>
+	
+	<body>
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<main>
+			<h1>Personal profile</h1>
+			<section>
+				<h2>Your information</h2>
+				<div th:text="|Name: ${user.name}|">User name</div>
+				<div th:text="|Surname: ${user.surname}|">Surname</div>
+				<div th:text="|Email: ${user.email}|">Email</div>
+			</section>
+			<section>
+				<h2>Your reviews</h2>
+				<div th:if="${#lists.isEmpty(user.reviews)}">
+					<span>You haven't reviewed any cereals yet</span>
+				</div>
+				<div>
+					<ul>
+						<li th:each="item : ${user.reviews}">
+							<div th:text="${item.title}">Title</div>
+							<div th:text="${item.body}">Desc</div>
+							<div th:number="|${item.rating} smiles|"></div>
+							<form th:action="@{/review/delete}" method="post">
+								<input type="hidden" th:value="${item.id}" name="idReview">
+								<button>Delete review</button>
+							</form>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

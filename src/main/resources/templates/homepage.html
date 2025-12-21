@@ -3,24 +3,56 @@
 <html>
 	<head>
 		<title>Smiling Cereals</title>
+		<link rel="stylesheet" th:href="@{/css/navbar.css}">
+		<link rel="stylesheet" th:href="@{/css/home.css}">
 	</head>
 	
 	<body>
-		<header>
-			<div th:if="${userDetails}">
-				<span th:text="${userDetails.username}"></span>
-				<a href="/logout">Logout</a>
-			</div>
-			<div th:unless="${userDetails}">
-				<a href="/login">Login</a>
-			</div>
-		</header>	
-		<h1>SMILING CEREALS</h1>
-		<p>Let's try some mechanics, boyz</p>
-		<section>
-			<a href="/cereals">List of all cereals available</a>
-			<a href="/admin/cereals/newCerealForm">Hey admin, create a new cereal</a>
-			<a href="/register">Click here to test the registration</a>
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="banner"></div>
+		<h1>Smiling Cereals</h1>
+		<p th:if="${#lists.isEmpty(featured)}">No featured</p>
+		<h2>Featured Cereals</h2>
+		<!--Section for the featured cereals chosen by the admin-->
+		<section th:if="${!#lists.isEmpty(featured)}" class="featured-section">
+		    <div class="featured-row">
+		        <div th:each="item : ${featured}" class="featured-card">
+		            <a th:href="@{/cereals/{id}(id=${item.id})}">
+		                <img th:src="@{'/images/cereals/' + ${item.fileName}}" alt="" class="featured-img">
+		                <p th:text="${item.name}">Cereal name</p>
+		            </a>
+		        </div>
+		    </div>
+		</section>
+		<!--Section for the top rated products-->
+		<h2>Top Rated Cereals</h2>
+		<p th:if="${#lists.isEmpty(topCereals)}">No Top Cereals</p>
+		<section th:if="${!#lists.isEmpty(topCereals)}" class="top-section">
+		    <div class="top-row">
+		        <div th:each="item : ${topCereals}" class="top-card">
+		            <a th:href="@{/cereals/{id}(id=${item.id})}">
+		                <img th:src="@{'/images/cereals/' + ${item.fileName}}" alt="" class="top-img">
+		                <p th:text="${item.name}">Cereal name</p>
+		            </a>
+		        </div>
+		    </div>
+		</section>
+		<!--Section for the lastest reviews-->
+		<section th:if="${!#lists.isEmpty(latestReviews)}">
+		    <h2>Latest reviews</h2>
+
+		    <ul>
+		        <li th:each="review : ${latestReviews}">
+		            <strong th:text="${review.cereal.name}">Cereal</strong>
+		            —
+		            <span th:text="${review.rating}">5</span>😀
+		            <p th:text="${review.title}">Title</p>
+					<p th:text="${review.body}">Body</p>
+		            <small>
+		                by <span th:text="|${review.user.name} ${review.user.surname}|"></span>
+		            </small>
+		        </li>
+		    </ul>
 		</section>
 	</body>
 </html>

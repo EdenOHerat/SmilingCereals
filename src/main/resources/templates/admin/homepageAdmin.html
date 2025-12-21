@@ -2,18 +2,11 @@
 <html>
 	<head>
 		<title>ADMIN HOME</title>
+		<link rel="stylesheet" th:href="@{/css/navbar.css}">
 	</head>
 	
 	<body>
-		<header>
-			<div th:if="${userDetails}">
-				<span th:text="${userDetails.username}"></span>
-				<a href="/logout">Logout</a>
-			</div>
-			<div th:unless="${user}">
-				<a href="/login">Login</a>
-			</div>
-		</header>		
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
 		<h1>HOLY SMOKES, CHARLIE! IT'S THE ADMIN!</h1>
 		<h2>Hello Mr. Admin, what do you wanna do?</h2>
 		<div>

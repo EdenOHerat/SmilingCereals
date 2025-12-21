@@ -3,9 +3,12 @@
 <html>
 	<head>
 		<title>All cereals</title>
+		<link rel="stylesheet" th:href="@{/css/navbar.css}">
+		<link rel="stylesheet" th:href="@{/css/allCereals.css}">
 	</head>
 	
 	<body>
+		<div th:replace="fragments/navbar :: navbar"></div>
 		<h1>SMILING CEREALS!!!</h1>
 		<p>CHOOSE THE ONES YOU LIKE THE MOST!!!</p>
 		
@@ -13,14 +16,31 @@
 			OH, NO!! OUR CEREALS ARE GONE!!!
 		</div>
 		
-		<ul>
-			<li th:each="item : ${cereals}">
-				<a th:href="@{/cereals/{id}(id=${item.id})}"
-					th:text="${item.name}">Cereal name
-				</a>
-				<div th:text="'flavor: ' + ${item.flavor}">Cereal flavor</div>
-				<p th:text="${item.description}">Description</p>					
-			</li>
-		</ul>
+		<section th:if="${!#lists.isEmpty(cereals)}" class="featured-section">
+		    <div class="cereals-row">
+		        <div th:each="item : ${cereals}" class="cereals-card">
+		            <a th:href="@{/cereals/{id}(id=${item.id})}">
+		                <img th:src="@{'/images/cereals/' + ${item.fileName}}" alt="" class="cereals-img">
+		                <p th:text="${item.name}">Cereal name</p>
+		            </a>
+					<p th:text="${item.description}"></p>
+					<!--Admin fragment for deletion of cereals-->
+					<div sec:authorize="hasAuthority('ADMIN')">
+						<form method="post" th:action="@{/admin/deleteCereal}">
+							<input type="hidden" th:value="${item.id}" name="itemId">
+							<button>Delete</button>
+						</form>
+					</div>
+					<!--Admin fragment for the featured management-->
+					<div sec:authorize="hasAuthority('ADMIN')">
+						<form method="post" th:action="@{/admin/featuredChange}">
+							<input type="hidden" th:value="${item.id}" name="itemId">
+							<button th:if="${item.featured}">Remove from Featured</button>
+							<button th:if="${!item.featured}">Add to Featured</button>
+						</form>
+					</div>
+		        </div>
+		    </div>
+		</section>
 	</body>
 </html>

@@ -1,0 +1,19 @@
+<header th:fragment="navbar">
+	<nav>
+		<a href="/">
+			<img src="/images/logo.png">
+		</a>
+		
+		<form th:action="@{/cereals/search}" method="get">
+			<input type="text" name="q" placeholder="Search..." required>
+			<button>Search</button>
+		</form>
+		
+		<a href="/cereals">All Cereals</a>
+		<a th:if="${userDetails}" href="/profile"> 
+		    <span th:text="${userDetails.username}"></span>
+		</a>
+		<a th:if="${userDetails}" href="/logout">Logout</a>
+		<a th:unless="${userDetails}" href="/login">Login</a>
+	</nav>
+</header>	

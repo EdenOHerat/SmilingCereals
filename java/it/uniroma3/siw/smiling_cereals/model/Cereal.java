@@ -21,14 +21,15 @@ public class Cereal {
 	private String flavor;
 	private String description;
 	private String fileName; //for the image
+	private boolean featured;
 	
 	/*This is for the smiles (rating)*/
-	private float avgSmiles = 0;
+	private float smiles = 0;
 	private int totalVotes = 0;
-	private long totalSmiles = 0;
+	private float totalSmiles = 0;
 	
 	/*Review*/
-	@OneToMany(mappedBy = "cereal", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cereal", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Review> reviews;
 	
 	public Cereal() {}
@@ -74,11 +75,11 @@ public class Cereal {
 	}
 
 	public float getAvgSmiles() {
-		return avgSmiles;
+		return smiles;
 	}
 
 	public void setAvgSmiles(int avgSmiles) {
-		this.avgSmiles = avgSmiles;
+		this.smiles = avgSmiles;
 	}
 
 	@Override
@@ -100,10 +101,10 @@ public class Cereal {
 	}
 	
 	// getter/setter per aggiornare media
-    public void addRating(float smiles) {
-        totalSmiles += smiles;
+    public void addRating(float reviewSmiles) {
+        totalSmiles += reviewSmiles;
         totalVotes++;
-        avgSmiles = (float)(totalSmiles/totalVotes);
+        smiles = totalSmiles/totalVotes;
     }
 
 	public List<Review> getReviews() {
@@ -112,6 +113,14 @@ public class Cereal {
 
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
+	}
+
+	public boolean isFeatured() {
+		return featured;
+	}
+
+	public void setFeatured(boolean featured) {
+		this.featured = featured;
 	}
 	
 	

@@ -1,14 +1,16 @@
 package it.uniroma3.siw.smiling_cereals.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Review {
@@ -20,11 +22,14 @@ public class Review {
 	private String body;
 	private Float rating;
 	
+	@Column(nullable = false)
+	private LocalDateTime createdAt;
+	
 	@ManyToOne
 	@JoinColumn(name = "cereal_id")
 	private Cereal cereal;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
@@ -94,5 +99,10 @@ public class Review {
 
 	public void setRating(Float rating) {
 		this.rating = rating;
+	}
+	
+	@PrePersist
+	public void onCreate() {
+		this.createdAt = LocalDateTime.now();
 	}
 }

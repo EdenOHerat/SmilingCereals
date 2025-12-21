@@ -1,10 +1,15 @@
 package it.uniroma3.siw.smiling_cereals.model;
 
+
+
+import java.util.List;
+
 import it.uniroma3.siw.smiling_cereals.model.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +22,9 @@ public class User {
 	private String name;
 	private String surname;
 	private String email;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Review> reviews;
 	
 	public Long getId() {
 		return id;
@@ -78,6 +86,12 @@ public class User {
 		} else if (!email.equals(other.email))
 			return false;
 		return true;
+	}
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 	
 }
